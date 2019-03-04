@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import web3 from './Web3'
+import Lottery from './Lottery'; // can interact with the contract 
 
 class App extends Component {
   render() {
