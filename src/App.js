@@ -8,7 +8,8 @@ class App extends Component {
     manager: "", 
     players: [],
     balance: "",
-    value: ""
+    value: "",
+    message: ""
   }
 
   async componentDidMount(){ //called whenever app component shows up on the screen
@@ -19,9 +20,30 @@ class App extends Component {
     this.setState({manager, players, balance});
   }
   
-  onSubmit=(e)=>{ //no need to bind the function with this syntax
+   onSubmit= async (e)=>{ //no need to bind the function with this syntax
     e.preventDefault();
+    const accounts = await web3.eth.getAccounts();
+
+    this.setState({message: 'Waiting on transaction success...'})
+
+    await lottery.methods.enter().send({ //will take 15-30 seconds to execute
+      from: accounts[0],
+      value: web3.utils.toWei(this.state.value, 'ether')
+    });
+
+    this.setState({message: "You have been entered!"})
   }
+
+  onClick = async ()=>{
+    const accounts = await web3.eth.getAccounts();
+    
+    this.setState({message: "Waiting on transaction success..."})
+
+    await lottery.methods.pickWinner().send({ from: accounts[0] }); // will take 15-30 second to execute, no return value from send function
+
+    this.setState({message: "A winner has been picked!"})
+  }
+
   render() {
     return (
       <div>
@@ -37,6 +59,11 @@ class App extends Component {
           </div>
           <button>Enter</button>
         </form>        
+        <hr />
+          <h4>Ready to pick a winner?</h4>
+          <button onClick={this.onClick}>Pick a winner</button>
+        <hr />
+        <h1>{this.state.message}</h1>
       </div>
     );
   }
