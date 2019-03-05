@@ -11,7 +11,9 @@ onSubmit() and onClick() - retreived list of active accounts, sets waiting messa
 
 render() - read different state properties and displayed them on the screen
 
-fromWei - converted wei to ether
+Used .fromWei - converted wei to ether
+
+
 
 
 
