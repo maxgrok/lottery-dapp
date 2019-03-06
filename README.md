@@ -2,7 +2,8 @@
 
 `npm start` to run app. 
 
-## Warning: This app presumes you have MetaMask installed and active on the Rinkeby Test Network
+## Warning!
+This app presumes you have MetaMask installed and active on the Rinkeby Test Network
 
 ## Summary
 1 component, initializes 5 state properties. 
