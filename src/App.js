@@ -8,7 +8,7 @@ class App extends Component {
     manager: "", 
     players: [],
     balance: "",
-    value: "",
+    value: "0.00",
     message: ""
   }
 
@@ -46,24 +46,28 @@ class App extends Component {
 
   render() {
     return (
-      <div>
-        <h2>This is our Lottery contract</h2>
+      <div className="ui container">
+        <div className="ui segment">
+        <h2>Welcome to the Lottery!</h2>
         <p> This contract is managed by: {this.state.manager}</p>
         <p>There are currently {this.state.players.length} people entered, competing to win {web3.utils.fromWei(this.state.balance, 'ether')} ether!</p>
-        <hr></hr>
+        </div>
+    <div className="ui segment">
       <form onSubmit={this.onSubmit}>
-        <h4>Want to try your luck?</h4>
-          <div> 
-              <label>Amount of Ether to Enter: </label>
-              <input onChange={(e)=>this.setState({value: e.target.value })} value={this.state.value} />
+        <h4>Want to try your luck? Enter at least 0.01 ether.</h4>
+        <label>Amount of Ether to Enter: </label>
+        <div className="ui action input">
+  <input type="text" onChange={(e)=>this.setState({value: e.target.value })} value={this.state.value} />
+
+          <button className="ui green button">Enter Ether Amount</button>
           </div>
-          <button>Enter</button>
         </form>        
-        <hr />
+        </div>
+        <div className="ui segment">
           <h4>Ready to pick a winner?</h4>
-          <button onClick={this.onClick}>Pick a winner</button>
-        <hr />
+          <button className="ui blue button" onClick={this.onClick}>Pick a winner</button>
         <h1>{this.state.message}</h1>
+      </div>
       </div>
     );
   }
